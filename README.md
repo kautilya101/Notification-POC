@@ -31,4 +31,5 @@ This is a proof-of-concept (POC) app demonstrating a basic notification system i
 2. Notification service saves the data of notification such as postId, ownerId, userid(user who likes the post). Here we can add the notification service that carries the notification to the user.
 Note :I have used in-memory due to local issues with docker therefore to cover the assignment within deadline.
 
-# Demo Video: https://drive.google.com/file/d/1ub67Fi8-UfA9_PYb2i4pGbfNx6jGJQ0K/view?usp=sharing
+### Demo Video: 
+https://drive.google.com/file/d/1ub67Fi8-UfA9_PYb2i4pGbfNx6jGJQ0K/view?usp=sharing

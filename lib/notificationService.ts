@@ -1,7 +1,9 @@
 import { notifications } from '@/data/notifications.data';
 import { subData } from '@/data/subs.data';
-import { INotificationService } from '@/types/notification.types';
+import { INotificationService, ISubscription } from '@/types/notification.types';
 import webPush from 'web-push';
+import { redis } from './redis';
+import { TelemetryPlugin } from 'next/dist/build/webpack/plugins/telemetry-plugin/telemetry-plugin';
 
 webPush.setVapidDetails(
   "mailto::kautilya101001@gmail.com",
@@ -10,25 +12,38 @@ webPush.setVapidDetails(
 )
 
 export async function sendNotification({ likeUserId, postId, postOwnerId } : INotificationService) {
-  const message = `${likeUserId} liked your post ${postId}`;
-  notifications.push({ // db 
-    to: postOwnerId,
-    message,
-    time: new Date().toISOString(),
-  });
+  try{
 
-  const subscription = subData[subData.length-1]
-  const { p256dh, auth } = subscription.keys;
-  const formattedSubscription = {
+    const message = `${likeUserId} liked your post ${postId}`;
+    notifications.push({ // db 
+      to: postOwnerId,
+      message,
+      time: new Date().toISOString(),
+    });
+    
+    const subDataStr = await redis.get(`sub:${likeUserId}`) as ISubscription;
+    if (!subDataStr) {
+      throw new Error(`No subscription found for user ${likeUserId}`);
+    }
+    
+    const subscription = subDataStr;
+    const { p256dh, auth } = subscription?.keys;
+    const formattedSubscription = {
     endpoint: subscription.endpoint,
     keys: {
       p256dh,
       auth
     }
   };
+  console.log('Sending Notification to frontend');
   await webPush.sendNotification(formattedSubscription, JSON.stringify({
     title: 'Test Notification',
     body: message,
     icon: '/icon.png',
-}))
+  }))
+  }
+  catch(e){
+    console.log(e);
+  }
+  
 }

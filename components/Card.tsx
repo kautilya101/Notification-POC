@@ -2,6 +2,7 @@
 
 import { IAnimals } from "@/types/animals.types";
 import { INotificationService } from "@/types/notification.types";
+import { currentUser } from "@/utils/contants";
 import { Heart } from "lucide-react";
 import { useState } from "react";
 
@@ -11,7 +12,6 @@ interface IAnimalCard {
 
 export const AnimalCard = ({ animal }: IAnimalCard ) => {
   const [isLiked, setIsLiked] = useState(false);
-  const currentUser = 'Kautilya101';
   
   const handleLike = async () => {
   const updatedLike = !isLiked;

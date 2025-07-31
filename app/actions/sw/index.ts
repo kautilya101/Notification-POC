@@ -1,6 +1,7 @@
 'use server'
  
 import { subData } from '@/data/subs.data'
+import { redis } from '@/lib/redis';
 import webPush from 'web-push'
  
 webPush.setVapidDetails(
@@ -9,7 +10,11 @@ webPush.setVapidDetails(
   process.env.NEXT_PUBLIC_VAPID_PRIVATE_KEY!
 )
  
-export async function subscribeUser(sub: PushSubscription) {
-  subData.push(sub)
+export async function subscribeUser(sub: PushSubscription, currentUser: string) {
+  const key = `sub:${currentUser}`;
+  console.log(key)
+  await redis.set(key, JSON.stringify(sub));
+  console.log(sub, "in api");
+  // subData.push(sub);
   return { success: true }
 }

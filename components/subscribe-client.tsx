@@ -3,6 +3,7 @@
 import { urlBase64ToUint8Array } from '@/utils'
 import React, { useEffect, useState } from 'react'
 import { subscribeUser } from '../app/actions/sw'
+import { currentUser } from '@/utils/contants';
 
 export function PushNotificationManager() {
   const [isSupported, setIsSupported] = useState(false)
@@ -24,7 +25,7 @@ export function PushNotificationManager() {
               userVisibleOnly: true,
               applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!),
             });
-            const response =  await subscribeUser(subscription)
+            const response =  await subscribeUser(subscription, currentUser)
             console.log(response);
           }
         }

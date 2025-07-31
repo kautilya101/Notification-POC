@@ -23,7 +23,7 @@ This is a proof-of-concept (POC) app demonstrating a basic notification system i
   cd <project-folder>
   npm install
   npm run dev
-
+  ```
 
 ## Approach
 

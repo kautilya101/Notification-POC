@@ -17,10 +17,8 @@ export async function sendNotification({ likeUserId, postId, postOwnerId } : INo
     time: new Date().toISOString(),
   });
 
-  console.log(`${message}`); // core notification
   const subscription = subData[subData.length-1]
   const { p256dh, auth } = subscription.keys;
-  console.log(p256dh, auth);
   const formattedSubscription = {
     endpoint: subscription.endpoint,
     keys: {
@@ -28,17 +26,9 @@ export async function sendNotification({ likeUserId, postId, postOwnerId } : INo
       auth
     }
   };
-  console.log(formattedSubscription)
   await webPush.sendNotification(formattedSubscription, JSON.stringify({
     title: 'Test Notification',
     body: message,
     icon: '/icon.png',
 }))
 }
-
-
-// Public Key:
-// BFr8iHGeQa10RissIIYeu2hSojB_VO7Xv9ruEa-cvLwmJVFafHyan7fyMDmuNmTaLk0es6F6wrVDqTh3cgRui9U
-
-// Private Key:
-// Qx8qS-m94hs4AwVlAPytuhrESjyzDBQ-g4xrJQhFrBc

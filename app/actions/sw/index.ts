@@ -10,8 +10,6 @@ webPush.setVapidDetails(
 )
  
 export async function subscribeUser(sub: PushSubscription) {
-  console.log("sub", sub);
   subData.push(sub)
-  console.log(subData);
   return { success: true }
 }

@@ -1,9 +1,12 @@
 import { AnimalCard } from "@/components/Card";
 import { Navbar } from "@/components/Navbar";
 import animals from "@/data/animals.data";
+import { PushNotificationManager } from "../components/subscribe-client";
 
 export default function HomePage() {
   return (
+    <>
+    <PushNotificationManager />
     <main className="w-full h-screen">
       <Navbar/>
       <div className="min-h-screen bg-gray-50 py-8">
@@ -16,7 +19,6 @@ export default function HomePage() {
             Discover loving animals waiting for their forever homes
           </p>
         </div>
-        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {animals.map((animal) => (
             <AnimalCard key={animal.id} animal={animal} />
@@ -25,5 +27,6 @@ export default function HomePage() {
       </div>
     </div>
     </main>
+    </>
   );
 }

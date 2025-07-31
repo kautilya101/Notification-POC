@@ -1,6 +1,5 @@
 "use client"
 
-import { LikeAction } from "@/app/actions/like";
 import { IAnimals } from "@/types/animals.types";
 import { INotificationService } from "@/types/notification.types";
 import { Heart } from "lucide-react";
@@ -37,9 +36,8 @@ export const AnimalCard = ({ animal }: IAnimalCard ) => {
 
       if (result.status === 'notified') {
         console.log('Ntofication Triggered on backend')
-        alert('✅ Notification triggered!');
       } else if (result.status === 'skipped') {
-        alert('⚠️ Self-like. No notification sent.');
+        console.log('Ntofication Triggered on backend')
       }
     } catch (error) {
       console.error('Error sending like:', error);

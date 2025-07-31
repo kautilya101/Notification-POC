@@ -30,3 +30,5 @@ This is a proof-of-concept (POC) app demonstrating a basic notification system i
 1. As user likes the post event is generated and api is called which equeue that data and creates a job which in turn handle by an worker and calls the notification service. 
 2. Notification service saves the data of notification such as postId, ownerId, userid(user who likes the post). Here we can add the notification service that carries the notification to the user.
 Note :I have used in-memory due to local issues with docker therefore to cover the assignment within deadline.
+
+

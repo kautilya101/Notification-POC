@@ -9,7 +9,7 @@ webPush.setVapidDetails(
   process.env.NEXT_PUBLIC_VAPID_PRIVATE_KEY!
 )
  
-export async function subscribeUser(sub: webPush.PushSubscription) {
+export async function subscribeUser(sub: PushSubscription) {
   console.log("sub", sub);
   subData.push(sub)
   console.log(subData);

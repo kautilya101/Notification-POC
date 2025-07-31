@@ -19,8 +19,17 @@ export async function sendNotification({ likeUserId, postId, postOwnerId } : INo
 
   console.log(`${message}`); // core notification
   const subscription = subData[subData.length-1]
-  console.log(subscription);
-  await webPush.sendNotification(subscription, JSON.stringify({
+  const { p256dh, auth } = subscription.keys;
+  console.log(p256dh, auth);
+  const formattedSubscription = {
+    endpoint: subscription.endpoint,
+    keys: {
+      p256dh,
+      auth
+    }
+  };
+  console.log(formattedSubscription)
+  await webPush.sendNotification(formattedSubscription, JSON.stringify({
     title: 'Test Notification',
     body: message,
     icon: '/icon.png',
